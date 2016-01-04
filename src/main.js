@@ -1,5 +1,5 @@
-const {Actions, streams} = require('./src/api.js');
-const UtilityCommands = require('./src/utilcommands/main.js');
+const {Actions, streams} = require('./api.js');
+const UtilityCommands = require('./utilcommands/main.js');
 
 const COMMAND_STORE = [];
 
