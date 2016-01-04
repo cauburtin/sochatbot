@@ -1,6 +1,6 @@
 #!/usr/bin/node
 var fs = require('fs');
-var createBundle = require('./requirify.js');
+var createBundle = require('requirify');
 
 var dest = __dirname + '/dest/build.user.js';
 try {
@@ -59,7 +59,15 @@ function justDoIt (forSure) {
         return prefix + el;
     }).map(function readFromFileSystem (el) {
         if (el === modules) {
-            return createBundle(modules);
+            return `(function () {
+                var require = ${createBundle(modules, {
+                    entry: './src/main.js',
+                    map: {
+                        'stream': '/lib/stream.js',
+                        'utils': '/lib/common.js',
+                    },
+                })};
+            `;
         }
         var prefix;
         if (el.startsWith('!')) {
@@ -68,7 +76,7 @@ function justDoIt (forSure) {
         }
         else prefix = `//#included "${el}"\n`;
         return prefix + fs.readFileSync(el, 'utf8');
-    }).join('\n');
+    }).join('\n') + `; })()`;
 
     fs.writeFile(dest, files, function allDoneKindSir () {
         console.log('Build finished, please don\'t run me too often');
