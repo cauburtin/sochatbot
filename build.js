@@ -29,15 +29,15 @@ var modules = [
     './src/utilcommands/mdn.js',
     './src/utilcommands/urban.js',
     './src/api.js',
-    './src/config.js',
-    './src/eventmaps.js',
+    './src/config.json',
+    './src/eventmaps.json',
     './src/streamsource.js',
+    './src/main.js',
 ];
 
 var injectables = [
     '!./src/header.js',
     modules,
-    './src/main.js',
 ];
 
 function justDoIt (forSure) {

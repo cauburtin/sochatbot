@@ -1,5 +1,5 @@
 const Stream = require('../lib/stream.js');
-const eventMaps = require('./eventmaps.js');
+const eventMaps = require('./eventmaps.json');
 
 function StreamSource (type, name=type) {
 	if (type === 'raw') {
@@ -17,7 +17,7 @@ function StreamSource (type, name=type) {
 			});
 		});
 	} else if (eventMaps.idToNum.hasOwnProperty(type)) {
-		return StreamSource('raw', name).filter(ev => ev.event_type === eventMaps.idToNum[type]);
+		return StreamSource('raw', name).filter(ev => String(ev.event_type) === eventMaps.idToNum[type]);
 	} else {
 		throw new Error(`Type ${type} unimplemented or not supported!`);
 	}

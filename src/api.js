@@ -1,4 +1,4 @@
-const config = require('./config.js');
+const config = require('./config.json');
 
 // mixin for common chat actions
 // the MessageObject class will use this, mostly
