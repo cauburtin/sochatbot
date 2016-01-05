@@ -24,7 +24,7 @@
         "22"    :    "FeedTicker"                 ,
         "29"    :    "UserSuspended"              ,
         "30"    :    "UserMerged"                 ,
-        "34"    :    "UserNameOrAvatarChanged"    ,
+        "34"    :    "UserNameOrAvatarChanged"    
     }                                             ,
     "idToNum" : {
         "MessagePosted"              :    "1"     ,
@@ -51,6 +51,6 @@
         "FeedTicker"                 :    "22"    ,
         "UserSuspended"              :    "29"    ,
         "UserMerged"                 :    "30"    ,
-        "UserNameOrAvatarChanged"    :    "34"    ,
-    }                                             ,
+        "UserNameOrAvatarChanged"    :    "34"     
+    }                                             
 }

@@ -1,14 +1,10 @@
-const Stream = require('../lib/stream.js');
+const Stream = require('rxstream');
 const eventMaps = require('./eventmaps.json');
+const {stream: raw, requestor} = require('./raw.js')();
 
 function StreamSource (type, name=type) {
 	if (type === 'raw') {
-		let stream = new Stream(name);
-		// TODO: delocalize the CHAT object
-		CHAT.addEventHandlerHook(function rawReciever (e) {
-			stream.emit(Object.assign({}, e));
-		});
-		return stream;
+		return raw;
 	} else if (type === 'pretty-event') {
 		return StreamSource('raw', name).map(function mapEventNumToName (ev) {
 			let evType = ev.event_type;
@@ -23,4 +19,7 @@ function StreamSource (type, name=type) {
 	}
 }
 
-module.exports = StreamSource;
+module.exports = {
+	StreamSource,
+	requestor,
+};

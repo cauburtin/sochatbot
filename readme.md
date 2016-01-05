@@ -11,10 +11,10 @@ run `node build.js`. that would dump a userscript called "build.user.js" in the 
 this makes heavy usage of a small stream class which I handcoded, because I wanted to play with Rx like stuff. awesome blossom.
 
 ### TODO
-- there are two or three (shared) things which depend on the window APIs for now, both should be easy to port for node. see `/lib/common.js`.
-- improve `requirify.js`
+- add fetch only endpoints for message actions
 - make it remember things depending on environment
 - improve the API
+- create adapter for logging in on node side
 
 
 ### License - WTFPL

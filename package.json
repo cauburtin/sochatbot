@@ -23,6 +23,7 @@
     "html-entities": "^1.2.0",
     "node-fetch": "^1.3.3",
     "request-promise": "^1.0.2",
-    "requirify": "git+ssh://git@gist.github.com/571b316413c6d59370c2.git"
+    "requirify": "git+ssh://git@gist.github.com/571b316413c6d59370c2.git",
+    "sechatsocket": "git+ssh://git@gist.github.com/4eed410fc24ad04fdc5e.git"
   }
 }

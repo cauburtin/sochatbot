@@ -1,4 +1,4 @@
-const Utils = require('../../lib/common.js');
+const Utils = require('apputils');
 
 module.exports = function urban ({args}) {
 	args = args.trim();

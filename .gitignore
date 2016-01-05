@@ -1,2 +1,8 @@
 build.user.js
-node_modules
+node_modules/*
+!node_modules/config
+!node_modules/rxstream.js
+!node_modules/utils.js
+!node_modules/sechatapi.js
+!node_modules/requirify
+!node_modules/sechatsocket

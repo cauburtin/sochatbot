@@ -1,4 +1,4 @@
-const {Actions, streams} = require('./api.js');
+const {Actions, streams} = require('sechatapi');
 const UtilityCommands = require('./utilcommands/main.js');
 
 const COMMAND_STORE = [];
@@ -24,3 +24,13 @@ COMMAND_STORE.push(function utilityCommandMatcher (content) {
 	let utilCommand = UtilityCommands[commandName];
 	return Promise.resolve(utilCommand({args})).then(content => ({content}));
 });
+
+try {
+	process.on('unhandledRejection', function (reason, p) {
+		console.log('ATTENTION: Unhandled Promise Rejection!');
+		console.error(reason);
+		console.info(p);
+	});
+} catch (err) {
+	console.log('Doesn\'t look like we are in node. So unhandledRejection global handler won\'t work.');
+}

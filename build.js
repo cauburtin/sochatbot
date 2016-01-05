@@ -28,11 +28,12 @@ var modules = [
     './src/utilcommands/main.js',
     './src/utilcommands/mdn.js',
     './src/utilcommands/urban.js',
-    './src/api.js',
     './src/config.json',
-    './src/eventmaps.json',
-    './src/streamsource.js',
     './src/main.js',
+    './sechatapi/main.js',
+    './sechatapi/raw.js',
+    './sechatapi/sources.js',
+    './sechatapi/eventmaps.json',
 ];
 
 var injectables = [
@@ -63,8 +64,10 @@ function justDoIt (forSure) {
                 var require = ${createBundle(modules, {
                     entry: './src/main.js',
                     map: {
-                        'stream': '/lib/stream.js',
-                        'utils': '/lib/common.js',
+                        'rxstream': '/lib/stream.js',
+                        'apputils': '/lib/common.js',
+                        'config': '/src/config.json',
+                        'sechatapi': '/sechatapi/main.js',
                     },
                 })};
             `;

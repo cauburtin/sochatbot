@@ -1,4 +1,4 @@
-const Utils = require('../../lib/common.js');
+const Utils = require('apputils');
 
 module.exports = function ({args}) {
 	let terms = args.split(/,\s*/g).map(function appendSite (term) {

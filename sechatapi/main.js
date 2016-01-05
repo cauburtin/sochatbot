@@ -1,20 +1,45 @@
-const config = require('./config.json');
+const config = require('config');
+const Utils = require('apputils');
+const {StreamSource, requestor} = require('./sources.js');
+
 
 // mixin for common chat actions
 // the MessageObject class will use this, mostly
 const Actions = {
-	sendMessage (content) {
-		// TODO: remap this to not use DOM
-		$('#input').val(content);
-		$('#sayit-button').click();
+	sendMessage (text, room=config.locker.startWithRoom) {
+		return requestor(`https://chat.${config.site}/chats/${room}/messages/new`, {
+			text,
+		});
 	},
-	reply(id, content) {
-		Actions.sendMessage(`:${id} ${content}`);
+	reply(content, id, room=Actions.getRoomFromMessageId(id)) {
+		return Promise.resolve(room).then(
+			rId => Actions.sendMessage(`:${id} ${content}`, rId)
+		);
+	},
+	getRoomFromMessageId(id) {
+		console.log(id);
+		let url = `https://chat.${config.site}/messages/${id}/history`;
+		console.log(url);
+		return requestor(url, undefined, undefined, 'GET').then(
+				res => res.text()
+			).then(
+				html => {
+					console.log(html);
+					return Utils.parseHTML(html);
+				}
+			).then(
+				dom => {
+					let room = dom(`.message > a[name="${id}"]`).attr('href').replace('/transcript/', '').match(/^\d+/)[0];
+					console.log(`Room: ${room}`);
+					return room;
+				}
+			).catch(err => {
+				console.error(err);
+			});
 	},
 };
 exports.Actions = Actions;
 
-const Utils = require('../lib/common.js');
 
 // this is *mostly* what we will interact with
 // if you are writing a plugin and think you need something more than what
@@ -27,13 +52,11 @@ class MessageObject {
 		this.senderName = ev.user_name;
 	}
 	reply(content) {
-		Actions.reply(this.ev.message_id, content);
+		Actions.reply(content, this.ev.message_id);
 	}
 }
 exports.MessageObject = MessageObject;
 
-
-const StreamSource = require('./streamsource.js');
 
 function intializeStreams () {
 

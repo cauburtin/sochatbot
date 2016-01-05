@@ -1,3 +1,9 @@
 {
-	"activator": ">>"
+	"activator": ">>",
+	"site": "stackoverflow.com",
+	"locker": {
+		"email": "LALALALALALALA",
+		"password": "OMGOMGOMGOMG",
+		"startWithRoom": "SOME NUMBER HERE YOYO"
+	}
 }
