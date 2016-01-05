@@ -23,7 +23,7 @@ node --use_strict --es_staging --harmony_destructuring --harmony_default_paramet
 that should be it.
 
 ### running in the browser
-> Note: right now, there is a bug with the browser side right now, so won't work. fuck fetch.
+> Note: You must load the chat page over HTTPS, and not HTTP. HTTP is not supported.
 
 run `node build.js`. that would dump a userscript called "build.user.js" in the the `dest/` directory. copy paste it in the console or install as a userscript, whatever. Only Firefox Developer Edition latest supported.
 

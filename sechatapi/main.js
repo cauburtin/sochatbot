@@ -17,25 +17,17 @@ const Actions = {
 		);
 	},
 	getRoomFromMessageId(id) {
-		console.log(id);
 		let url = `https://chat.${config.site}/messages/${id}/history`;
-		console.log(url);
 		return requestor(url, undefined, undefined, 'GET').then(
 				res => res.text()
 			).then(
-				html => {
-					console.log(html);
-					return Utils.parseHTML(html);
-				}
+				html => Utils.parseHTML(html)
 			).then(
 				dom => {
 					let room = dom(`.message > a[name="${id}"]`).attr('href').replace('/transcript/', '').match(/^\d+/)[0];
-					console.log(`Room: ${room}`);
 					return room;
 				}
-			).catch(err => {
-				console.error(err);
-			});
+			);
 	},
 };
 exports.Actions = Actions;
