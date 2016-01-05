@@ -6,3 +6,4 @@ node_modules/*
 !node_modules/sechatapi.js
 !node_modules/requirify
 !node_modules/sechatsocket
+!node_modules/apputils.js
