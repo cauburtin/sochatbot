@@ -52,24 +52,28 @@ exports.MessageObject = MessageObject;
 
 function intializeStreams () {
 
-	const messageStream = StreamSource('MessagePosted');
+	const messageStream = StreamSource('MessagePosted').map(normalize);
 
-	const editStream = StreamSource('MessageEdited');
+	const editStream = StreamSource('MessageEdited').map(normalize);
 
 	const commandStream = messageStream.concat(editStream, 'commandStream');
 
 	const interestingMessageStream = commandStream.filter(function filterActivatorStarting ({content}) {
-		return Utils.decodeHTMLEntities(content).trim().startsWith(config.activator);
+		return content.startsWith(config.activator);
 	}, 'interestingMessageStream');
 
 	const parsedMessageStream = interestingMessageStream.map(el => {
-		el.content = Utils.decodeHTMLEntities(el.content);
 		return new MessageObject(el);
 	}, 'parsedMessageStream');
 
 	return {
 		messageStream, editStream, commandStream, interestingMessageStream, parsedMessageStream
 	};
+
+	function normalize(ev) {
+		ev.content = Utils.decodeHTMLEntities(ev.content).trim();
+		return ev;
+	}
 
 }
 
