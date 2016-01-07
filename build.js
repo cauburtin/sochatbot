@@ -22,6 +22,7 @@ try {
 var modules = [
     './lib/stream.js',
     './lib/common.js',
+    './lib/storage.js',
     './src/utilcommands/google.js',
     './src/utilcommands/info.js',
     './src/utilcommands/lecture.js',
@@ -68,6 +69,7 @@ function justDoIt (forSure) {
                         'apputils': '/lib/common.js',
                         'config': '/src/config.json',
                         'sechatapi': '/sechatapi/main.js',
+                        'storage': '/lib/storage.js',
                     },
                 })};
             `;
