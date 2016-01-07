@@ -1,10 +1,34 @@
 const {Actions, streams} = require('sechatapi');
+const Storage = require('storage');
+
 const UtilityCommands = require('./utilcommands/main.js');
 
-const COMMAND_STORE = [];
+Storage.load().then(init);
 
-streams.parsedMessageStream.subscribe(function utilityCommandReplier (msg) {
+const COMMAND_STORE = [
+	// TODO: this shall have more!
+	utilityCommandMatcher,
+];
+
+function init() {
+	// all subscriptions to streams from above
+	// shall be made here in one go
+	streams.parsedMessageStream.subscribe(utilityCommandReplier);
+}
+
+try {
+	process.on('unhandledRejection', function (reason, p) {
+		console.log('ATTENTION: Unhandled Promise Rejection!');
+		console.error(reason);
+		console.info(p);
+	});
+} catch (err) {
+	console.log('Doesn\'t look like we are in node. So unhandledRejection global handler won\'t work.');
+}
+
+function utilityCommandReplier (msg) {
 	let commandResponses = Promise.all(COMMAND_STORE.map(function (command) {
+		// TODO: documentation for this
 		return command(msg.content, msg);
 	}));
 	commandResponses.then(function (responses) {
@@ -16,21 +40,15 @@ streams.parsedMessageStream.subscribe(function utilityCommandReplier (msg) {
 		}
 		return Actions.send(reply.content);
 	});
-});
+}
 
-COMMAND_STORE.push(function utilityCommandMatcher (content) {
+function utilityCommandMatcher (content) {
 	let [commandName, args] = content.split(/\s+/, 2);
-	if (!(commandName in UtilityCommands)) return;
+
+	if (!(commandName in UtilityCommands)) {
+		return;
+	}
+
 	let utilCommand = UtilityCommands[commandName];
 	return Promise.resolve(utilCommand({args})).then(content => ({content}));
-});
-
-try {
-	process.on('unhandledRejection', function (reason, p) {
-		console.log('ATTENTION: Unhandled Promise Rejection!');
-		console.error(reason);
-		console.info(p);
-	});
-} catch (err) {
-	console.log('Doesn\'t look like we are in node. So unhandledRejection global handler won\'t work.');
 }
