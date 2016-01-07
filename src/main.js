@@ -54,4 +54,4 @@ function utilityCommandMatcher (content) {
 	return Promise.resolve(utilCommand({args})).then(content => ({content}));
 }
 
-setInterval(() => Storage.dump(), config.storage.dumpInterval);
+setInterval(() => Storage.dump(), config.storage.dumpInterval*1000);
