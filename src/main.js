@@ -1,5 +1,6 @@
 const {Actions, streams} = require('sechatapi');
 const Storage = require('storage');
+const config = require('config');
 
 const UtilityCommands = require('./utilcommands/main.js');
 
@@ -52,3 +53,5 @@ function utilityCommandMatcher (content) {
 	let utilCommand = UtilityCommands[commandName];
 	return Promise.resolve(utilCommand({args})).then(content => ({content}));
 }
+
+setInterval(() => Storage.dump(), config.storage.dumpInterval);

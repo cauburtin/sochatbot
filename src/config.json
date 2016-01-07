@@ -6,5 +6,8 @@
 		"password": "OMGOMGOMGOMG",
 		"startWithRoom": "SOME NUMBER HERE YOYO"
 	},
-	"storageName": "/path/to/file/for/node or name_of_key_to_use_in_local_storage_for_browser"
+	"storage": {
+		"path": "/path/to/file/for/node or name_of_key_to_use_in_local_storage_for_browser",
+		"dumpInterval": 5
+	}
 }
