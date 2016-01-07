@@ -7,3 +7,4 @@ node_modules/*
 !node_modules/requirify
 !node_modules/sechatsocket
 !node_modules/apputils.js
+!node_modules/storage.js
