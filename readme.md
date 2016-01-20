@@ -1,5 +1,13 @@
 # another bot for so-chat
 
+**NOTE:**
+I am not working on this anymore. Currently it is at the stage of "works good". The codebase is in good shape, and is extendable.
+I just don't have the time and motivation to add features I wanted to add.
+The persistent memory part is missing, to be specific.
+If you came here to write/make/establish a bot for SO chats, feel free to take over. The codebase is small and easy to work on.
+I am quite happy I already implemented most of the difficult parts, so you mostly won't need to interact with SO directly anywhere.
+Please have a look at package.json for the custom deps, and things committed to VC inside node_modules. Everything else is easy stuff.
+
 ok here is my take at writing a bot for Stackoverflow chat network.
 
 the aim here is to keep things easy to extend and use modern stuff. modular code - let it work with any environment without *any* changes to core source code at all, only by adding lightweight shims or an adapter to the outside world.
