@@ -4,6 +4,7 @@ const commands = [
 	'urban',
 	'info',
 	'lecture',
+	'mem',
 ];
 
 module.exports = commands.reduce(function (map, cmd) {

@@ -29,6 +29,7 @@ var modules = [
     './src/utilcommands/main.js',
     './src/utilcommands/mdn.js',
     './src/utilcommands/urban.js',
+    './src/utilcommands/mem.js',
     './src/config.json',
     './src/main.js',
     './sechatapi/main.js',

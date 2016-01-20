@@ -1,4 +1,5 @@
-build.user.js
+dest/build.user.js
+dest/memory.json
 node_modules/*
 !node_modules/config
 !node_modules/rxstream.js
