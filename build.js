@@ -4,15 +4,15 @@ var createBundle = require('requirify');
 
 var dest = __dirname + '/dest/build.user.js';
 try {
-    if (sys.argv[0].endsWith('/build.js')) {
+    if (process.argv[0].endsWith('/build.js')) {
         // probably just executing directly like fine people
         // do you like long function names too?
-        if (sys.argv[1].length) {
-            dest = sys.argv[1];
+        if (process.argv[1].length) {
+            dest = process.argv[1];
         }
         // bet you love those
-    } else if (sys.argv[2].length) {
-        dest = sys.argv[2];
+    } else if (process.argv[2].length) {
+        dest = process.argv[2];
     }
 } catch (err) {
     // I kind of care about errors
